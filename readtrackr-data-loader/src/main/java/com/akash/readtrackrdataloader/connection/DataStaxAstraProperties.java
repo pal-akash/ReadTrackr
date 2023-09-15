@@ -1,4 +1,4 @@
-package connection;
+package com.akash.readtrackrdataloader.connection;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 

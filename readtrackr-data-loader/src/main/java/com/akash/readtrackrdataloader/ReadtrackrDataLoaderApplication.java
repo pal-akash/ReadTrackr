@@ -1,6 +1,6 @@
 package com.akash.readtrackrdataloader;
 
-import connection.DataStaxAstraProperties;
+import com.akash.readtrackrdataloader.connection.DataStaxAstraProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.cassandra.CqlSessionBuilderCustomizer;
