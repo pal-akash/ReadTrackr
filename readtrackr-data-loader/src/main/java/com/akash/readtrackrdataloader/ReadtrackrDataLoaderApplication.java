@@ -2,7 +2,6 @@ package com.akash.readtrackrdataloader;
 
 import com.akash.readtrackrdataloader.author.Author;
 import com.akash.readtrackrdataloader.author.AuthorRepository;
-import com.akash.readtrackrdataloader.author.AuthorService;
 import com.akash.readtrackrdataloader.book.Book;
 import com.akash.readtrackrdataloader.book.BookRepository;
 import com.akash.readtrackrdataloader.connection.DataStaxAstraProperties;
@@ -26,7 +25,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -39,9 +37,6 @@ public class ReadtrackrDataLoaderApplication {
 
 	@Autowired
 	BookRepository bookRepository;
-
-	@Autowired
-	AuthorService authorService;
 
 	@Value("${datadump.location.author}")
 	private String authorDumpLocation;
@@ -80,7 +75,6 @@ public class ReadtrackrDataLoaderApplication {
 					System.out.println("Saving author " + author.getName() + "...");
 
 					authorRepository.save(author);
-					//authorService.insertIfNotExists(author);
 
 				}catch (JSONException e){
 					e.printStackTrace();
