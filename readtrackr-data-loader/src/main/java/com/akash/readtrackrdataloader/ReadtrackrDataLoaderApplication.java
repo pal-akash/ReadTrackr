@@ -26,6 +26,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -62,14 +63,18 @@ public class ReadtrackrDataLoaderApplication {
 
 				try {
 					JSONObject jsonObject = new JSONObject(jsonString);
+					String authorId = jsonObject.optString("key").replace("/authors/", "");
+
+					if(!authorRepository.findById(authorId).isEmpty()){
+						return;
+					}
 
 					//Construct the author object
 
 					Author author = new Author();
 					author.setName(jsonObject.optString("name"));
 					author.setPersonalName(jsonObject.optString("personal_name"));
-					author.setId(jsonObject.optString("key").replace("/authors/", ""));
-
+					author.setId(authorId);
 
 					//Persist into the repository
 					System.out.println("Saving author " + author.getName() + "...");
@@ -97,6 +102,11 @@ public class ReadtrackrDataLoaderApplication {
 
 				try {
 					JSONObject jsonObject = new JSONObject(jsonString);
+
+					String bookId = jsonObject.getString("key").replace("/works/", "");
+					if(!bookRepository.findById(bookId).isEmpty()){
+						return;
+					}
 
 					//Construct the Book object
 
@@ -161,8 +171,8 @@ public class ReadtrackrDataLoaderApplication {
 	@PostConstruct
 	public void start(){
 		//System.out.println("Application started");
-		initAuthors();
-		//initWorks();
+		//initAuthors();
+		initWorks();
 	}
 
 	@Bean
