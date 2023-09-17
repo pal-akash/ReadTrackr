@@ -1,8 +1,0 @@
- spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          github:
-            client-id: ${github.application.client.id}
-            client-secret: ${github.application.client.secret}

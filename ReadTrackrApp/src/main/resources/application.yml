@@ -1,0 +1,35 @@
+ spring:
+  application:
+   name: readtrackr
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: ${github.application.client.id}
+            client-secret: ${github.application.client.secret}
+  data:
+    cassandra:
+      keyspace-name: main
+      username: ${CLIENT_ID}
+      password: ${CLIENT_SECRET}
+      schema-action: create-if-not-exists
+      request:
+        timeout: 10s
+      connection:
+        connect-timeout: 10s
+        init-query-timeout: 10s
+
+
+  main:
+    allow-circular-references: true
+
+ datastax.astra:
+   secure-connect-bundle: secure-connect.zip
+
+ astra.db:
+   id: ${DB_ID}
+   region: asia-south1
+   keyspace: main
+   application.token: ${TOKEN}
